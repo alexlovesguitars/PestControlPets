@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :users, only: [:create, :new, :update]
-  resources :pets, only: [:show, :create, :new]
+  resources :pets, only: [:create, :new, :show]
   resources :bookings, only: [:create, :new, :index]
 end
