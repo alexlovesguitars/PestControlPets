@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pets#home"
-  get "pets/home", to: "pets#home", as: :home
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,6 +11,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :users, only: [:create, :new]
-  resources :pets, only: [:index, :show, :create, :new]
+  resources :pets, only: [:show, :create, :new]
   resources :bookings, only: [:create, :new]
 end
