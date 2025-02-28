@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>new pet page</h2>
+
+  <%= simple_form_for(@pet) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :race %>
+    <%= f.input :price_per_day%>
+    <%= f.input :description%>
+    <%= f.input :targets%>
+    <%= f.input :photo, as: :file %>
+    <%= f.submit %>
+  <% end %>
+</div>
