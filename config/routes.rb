@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pets#home"
-  get 'home', to: 'pets#home'
+  get "pets/home", to: "pets#home", as: :home
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,5 +14,4 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :new]
   resources :pets, only: [:index, :show, :create, :new]
   resources :bookings, only: [:create, :new]
-  get "pets/home", to: "pets#home", as: :home
 end
