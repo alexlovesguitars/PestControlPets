@@ -8,6 +8,7 @@
     <p>$<%= @pet.price_per_day %> per day</p>
     <p><%= @pet.targets %></p>
     <p><%= @pet.description %></p>
+    <p><%= link_to "This Animal is no longer available", pet_path(@pet), class: "btn btn-primary btn-sm", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %></p>
   </div>
 
 <% if @pet.user == current_user %>
