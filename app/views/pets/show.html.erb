@@ -10,4 +10,11 @@
     <p><%= @pet.description %></p>
     <p><%= link_to "This Animal is no longer available", pet_path(@pet), class: "btn btn-primary btn-sm", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %></p>
   </div>
+
+<% if @pet.user == current_user %>
+      <div class="pet-actions">
+        <%= link_to "Edit Hunting Preferences", edit_pet_path(@pet), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
 </div>

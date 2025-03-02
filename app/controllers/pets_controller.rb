@@ -1,4 +1,5 @@
 class PetsController < ApplicationController
+  before_action :set_pet, only: [:show, :edit, :destroy] 
   skip_before_action :authenticate_user!, only: [:show, :home]
 
   def home
@@ -6,7 +7,6 @@ class PetsController < ApplicationController
   end
 
   def show
-    @pet = Pet.find(params[:id])
   end
 
   def new
@@ -24,16 +24,31 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    @pet = Pet.find(params[:id])
     if @pet.user == current_user # only deletable if its your own pet
       @pet.destroy
       redirect_to root_path, notice: "Pet deleted successfully."
     else
-      redirect_to @pet, alert: "You are not authorized to delete this pet."
+      redirect_to pet_path(@pet), alert: "You are not authorized to delete this pet."
+    end
+  end
+
+  def edit
+    @pet = Pet.find(params[:id])
+  end
+
+  def update
+    if @pet.user == current_user && @pet.update(pet_params)
+      redirect_to pet_path(@pet)
+     else
+       render :edit, status: :unprocessable_entity
     end
   end
 
   private
+  
+  def set_pet
+    @pet = Pet.find(params[:id])
+  end
 
   def pet_params
     params.require(:pet).permit(:name, :race, :price_per_day, :description, :targets, :user_id, :photo)
