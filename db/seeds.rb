@@ -11,25 +11,29 @@ require 'faker'
 puts "Cleaning database..."
 Pet.destroy_all
 
-puts "Creating pets..."
-Pet.create!(name: "Beethoven", race: "Dog", price_per_day: 20, description: "lorem ipsum", targets: "rats")
-puts "Created Beethoven"
-Pet.create!(name: "Berlioz", race: "Cat", price_per_day: 10, description: "lorem ipsum", targets: "rats")
-puts "Created Berlioz"
-Pet.create!(name: "Toulouse", race: "Cat", price_per_day: 8, description: "lorem ipsum", targets: "mice")
-puts "Created Toulouse"
-Pet.create!(name: "Duchess", race: "Cat", price_per_day: 25, description: "lorem ipsum", targets: "mice")
-puts "Created Duchess"
-Pet.create!(name: "Kayak", race: "Cat", price_per_day: 2, description: "lorem ipsum", targets: "bugs")
-puts "Created Kayak"
-Pet.create!(name: "Garfield", race: "Cat", price_per_day: 8, description: "lorem ipsum", targets: "bed bugs")
-puts "Created Garfield"
-Pet.create!(name: "Scooby-Doo", race: "Dog", price_per_day: 25, description: "lorem ipsum", targets: "mosquitoes")
-puts "Created Scooby-Doo"
-Pet.create!(name: "Godzilla", race: "Iguana", price_per_day: 100, description: "lorem ipsum", targets: "spiders")
-puts "Created Godzilla"
-Pet.create!(name: "Raffaelo", race: "Turtle", price_per_day: 500, description: "lorem ipsum", targets: "villains")
-puts "Created Raffaelo"
+puts "Creating users"
+users = 5.times.map do
+  User.create!(
+    email: Faker::Internet.email,
+    password: 'password123',
+    password_confirmation: 'password123'
+  )
+end
 
+puts "Creating pets..."
+[
+  {name: "Beethoven", race: "Dog", price_per_day: 20, description: "lorem ipsum", targets: "rats"},
+  {name: "Berlioz", race: "Cat", price_per_day: 10, description: "lorem ipsum", targets: "rats"},
+  {name: "Toulouse", race: "Cat", price_per_day: 8, description: "lorem ipsum", targets: "mice"},
+  {name: "Duchess", race: "Cat", price_per_day: 25, description: "lorem ipsum", targets: "mice"},
+  {name: "Kayak", race: "Cat", price_per_day: 2, description: "lorem ipsum", targets: "bugs"},
+  {name: "Garfield", race: "Cat", price_per_day: 8, description: "lorem ipsum", targets: "bed bugs"},
+  {name: "Scooby-Doo", race: "Dog", price_per_day: 25, description: "lorem ipsum", targets: "mosquitoes"},
+  {name: "Godzilla", race: "Iguana", price_per_day: 100, description: "lorem ipsum", targets: "spiders"},
+  {name: "Raffaelo", race: "Turtle", price_per_day: 500, description: "lorem ipsum", targets: "villains"}
+].each do |pet_attributes|
+  pet = Pet.create!(pet_attributes.merge(user: users.sample))
+  puts "Created #{pet.name}"
+end
 
 puts "Created #{Pet.count} pets"

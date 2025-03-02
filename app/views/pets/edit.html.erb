@@ -1,0 +1,27 @@
+<header class="header">
+  <%= link_to "< Home page", root_path %>
+</header>
+
+<div class="grid">
+  <div class="pet-card">
+    <h2>Edit <%= @pet.name %>'s Hunting Preferences</h2>
+
+    <div class="pet-info">
+      <p><strong>Name:</strong> <%= @pet.name %></p>
+      <p><strong>Race:</strong> <%= @pet.race %></p>
+      <p><strong>Price:</strong> $<%= @pet.price_per_day %> per day</p>
+      <p><strong>Description:</strong> <%= @pet.description %></p>
+    </div>
+
+    <%= simple_form_for @pet do |f| %>
+      <div class="form-inputs">
+        <%= f.input :targets, label: "Hunting Targets", hint: "Specify what this pet hunts (e.g., 'mice, birds, small game')" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Update Hunting Preferences", class: "btn-primary" %>
+        <%= link_to "Cancel", pet_path(@pet), class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
