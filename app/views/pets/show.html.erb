@@ -1,20 +1,23 @@
-<header class="header">
-  <%= link_to "< Home page", root_path %>
-</header>
-<div class="grid">
-  <div class="pet-card">
-    <h2><%= @pet.name %></h2>
-    <p><%= @pet.race %></p>
-    <p>$<%= @pet.price_per_day %> per day</p>
-    <p><%= @pet.targets %></p>
-    <p><%= @pet.description %></p>
-    <p><%= link_to "This Animal is no longer available", pet_path(@pet), class: "btn btn-primary btn-sm", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %></p>
+<div class="container">
+  <header class="header">
+    <%= link_to "< Home page", root_path %>
+  </header>
+  <div class="grid">
+    <div class="pet-card">
+      <%= image_tag(@pet.photo, width: "25%") %>
+      <h2><%= @pet.name %></h2>
+      <p><%= @pet.race %></p>
+      <p>$<%= @pet.price_per_day %> per day</p>
+      <p><%= @pet.targets %></p>
+      <p><%= @pet.description %></p>
+      <p><%= link_to "Delete", pet_path(@pet), class: "btn btn-danger btn-sm", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %></p>
+    </div>
+
+  <% if @pet.user == current_user %>
+    <div class="pet-actions">
+      <%= link_to "Edit Hunting Preferences", edit_pet_path(@pet), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
   </div>
-
-<% if @pet.user == current_user %>
-      <div class="pet-actions">
-        <%= link_to "Edit Hunting Preferences", edit_pet_path(@pet), class: "btn btn-primary" %>
-      </div>
-    <% end %>
-
 </div>
