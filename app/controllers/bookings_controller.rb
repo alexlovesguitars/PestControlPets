@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:edit] 
-  before_action :authenticate_user! 
+  before_action :set_booking, only: [:edit, :show, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @bookings = current_user.bookings
@@ -16,14 +16,16 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = current_user.bookings.new(booking_params)
+    @booking = Booking.new(booking_params)
+    @booking.user = current_user
+    @booking.pet = Pet.find(params[:pet_id])
     if @booking.save
-      redirect_to @booking, notice: 'Booking was successfully created.'
+      redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
     else
       render :new
     end
   end
-  
+
   def edit
   end
 
@@ -36,9 +38,8 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-    @booking = current_user.bookings.find(params[:id])
     @booking.destroy
-    redirect_to bookings_url, notice: 'Booking was successfully deleted.'
+    redirect_to bookings_path, status: :see_other, notice: 'Booking was successfully deleted.'
   end
 
   private
@@ -46,7 +47,7 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:start_date, :end_date, :pet_id)
   end
-  
+
   def set_booking
     @booking = Booking.find(params[:id])
   end
