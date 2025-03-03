@@ -13,10 +13,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :new, :update]
   resources :pets, only: [:create, :new, :show, :edit, :update, :destroy]
-  resources :bookings, only: [:index, :show]
+  resources :bookings, only: [:index, :show, :edit, :update, :destroy]
 
   # Nested bookings for pets
   resources :pets do
-    resources :bookings, only: [:new, :create, :edit, :update, :destroy]
+    resources :bookings, only: [:new, :create]
   end
 end
