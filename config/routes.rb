@@ -13,12 +13,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :new, :update]
   resources :pets, only: [:create, :new, :show, :edit, :update, :destroy]
-
-  # Add show action for bookings without changing existing ones
-  resources :bookings, only: [:create, :new, :index, :show, :edit, :update, :destroy]
+  resources :bookings, only: [:index, :show]
 
   # Nested bookings for pets
   resources :pets do
-    resources :bookings, only: [:new, :create]
+    resources :bookings, only: [:new, :create, :edit; :update, :destroy]
   end
 end

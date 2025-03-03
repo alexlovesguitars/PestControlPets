@@ -1,23 +1,20 @@
 class BookingsController < ApplicationController
-  before_action :authenticate_user!  # Ensure user is logged in
+  before_action :set_booking, only: [:edit] 
+  before_action :authenticate_user! 
 
-  # Display all bookings for the current user
   def index
     @bookings = current_user.bookings
   end
 
-  # Show details of a specific booking
+
   def show
-    @booking = Booking.find(params[:id])
   end
 
-  # Create a new booking
   def new
     @booking = Booking.new
     @pet = Pet.find(params[:pet_id])  # To link the pet when creating a booking
   end
 
-  # Create a booking
   def create
     @booking = current_user.bookings.new(booking_params)
     if @booking.save
@@ -26,8 +23,18 @@ class BookingsController < ApplicationController
       render :new
     end
   end
+  
+  def edit
+  end
 
-  # Destroy a booking
+  def update
+    if @booking.save
+      redirect_to booking_path(@booking)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @booking = current_user.bookings.find(params[:id])
     @booking.destroy
@@ -36,8 +43,11 @@ class BookingsController < ApplicationController
 
   private
 
-  # Strong parameters to allow only the relevant fields
   def booking_params
     params.require(:booking).permit(:start_date, :end_date, :pet_id)
+  end
+  
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
 end
