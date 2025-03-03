@@ -17,6 +17,6 @@ Rails.application.routes.draw do
 
   # Nested bookings for pets
   resources :pets do
-    resources :bookings, only: [:new, :create, :edit; :update, :destroy]
+    resources :bookings, only: [:new, :create, :edit, :update, :destroy]
   end
 end
