@@ -11,7 +11,6 @@
       <%= link_to 'View Details', booking_path(booking) %> |
       <%= link_to 'Edit', edit_booking_path(booking) %> |
       <%= link_to "Delete", booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-      <%= button_to 'Delete', booking_path(booking), method: :delete, data: { turbo_confirm: 'Are you sure?' } %>
     </div>
   <% end %>
 <% end %>
