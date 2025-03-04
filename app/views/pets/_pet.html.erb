@@ -1,6 +1,6 @@
 
 <div class="pet-card">
-  <%= image_tag(pet.photo, width: "25%") %>
+  <%= cl_image_tag(pet.photo.key, width: "25%") %>
   <h2><%= link_to pet.name, pet %></h2>
   <p><%= pet.race %></p>
   <p>$<%= pet.price_per_day %> per day</p>
