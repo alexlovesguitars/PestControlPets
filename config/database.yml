@@ -78,7 +78,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  adapter: postgresql
   database: pest_control_pets_production
   username: pest_control_pets
   password: <%= ENV["PEST_CONTROL_PETS_DATABASE_PASSWORD"] %>
