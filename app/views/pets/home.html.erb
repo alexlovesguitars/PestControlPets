@@ -3,8 +3,14 @@
     <h1>All pest control pets</h1>
   </div>
   <div class="grid">
-	  <%# <% @pets.each do |pet| %>
-	    <%# <%= render pet %>
-	  <%# <% end %>
+	  <% @pets.each do |pet| %>
+	    <div class="pet-card" >
+      <%= cl_image_tag(pet.photo.key, width: "25%") %>
+        <h2><%= link_to pet.name, pet %></h2>
+        <p><%= pet.race %></p>
+        <p>$<%= pet.price_per_day %> per day</p>
+        <p><%= pet.targets %></p>
+      </div>
+	  <% end %>
    </div>
 </div>
