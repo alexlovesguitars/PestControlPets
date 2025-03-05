@@ -30,8 +30,8 @@ class BookingsController < ApplicationController
   end
 
   def update
-    if @booking.save
-      redirect_to booking_path(@booking)
+    if @booking.update(booking_params)
+      redirect_to booking_path(@booking), notice: 'Booking was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end

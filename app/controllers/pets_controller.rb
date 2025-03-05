@@ -1,5 +1,5 @@
 class PetsController < ApplicationController
-  before_action :set_pet, only: [:show, :edit, :destroy] 
+  before_action :set_pet, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:show, :home]
 
   def home
@@ -33,19 +33,18 @@ class PetsController < ApplicationController
   end
 
   def edit
-    @pet = Pet.find(params[:id])
   end
 
   def update
-    if @pet.user == current_user && @pet.update(pet_params)
-      redirect_to pet_path(@pet)
-     else
-       render :edit, status: :unprocessable_entity
+    if @pet.update(pet_params)
+      redirect_to pet_path(@pet), notice: "Pet updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
-  
+
   def set_pet
     @pet = Pet.find(params[:id])
   end
