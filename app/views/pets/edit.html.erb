@@ -6,7 +6,7 @@
   <div class="grid">
     <div class="pet-card">
       <h2>Edit <%= @pet.name %>'s Hunting Preferences</h2>
-        <%= cl_image_tag(@pet.photo.key, width: "25%") %>
+        <%= cl_image_tag(@pet.photo.key) %>
       <div class="pet-info">
         <p><strong>Name:</strong> <%= @pet.name %></p>
         <p><strong>Race:</strong> <%= @pet.race %></p>

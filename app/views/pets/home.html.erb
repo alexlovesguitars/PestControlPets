@@ -1,20 +1,10 @@
-<div class="container">
+<div class="container home">
   <div class="header">
-    <h1>All pest control pets</h1>
+    <h1>Browse for your next pest controller</h1>
   </div>
   <div class="grid">
 	  <% @pets.each do |pet| %>
-	    <div class="pet-card" >
-      <% if pet.photo.attached? %>
-        <%= cl_image_tag(pet.photo.key, width: "25%") %>
-      <% else %>
-        <span>Hello</span>
-      <% end %>
-        <h2><%= link_to pet.name, pet %></h2>
-        <p><%= pet.race %></p>
-        <p>$<%= pet.price_per_day %> per day</p>
-        <p><%= pet.targets %></p>
-      </div>
+	    <%= render pet %>
 	  <% end %>
    </div>
 </div>
