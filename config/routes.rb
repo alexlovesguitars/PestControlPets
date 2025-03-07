@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   resources :pets do
     resources :bookings, only: [:new, :create]
   end
+
+  get 'my_pets', to: 'pets#my_pets', as: :my_pets
 end
