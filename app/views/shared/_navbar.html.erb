@@ -20,23 +20,14 @@
           <li class="nav-item active mx-1">
             <%= link_to "My pets", "#", class: "btn btn-outline-dark rounded-pill" %>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown mx-1">
             <% if current_user.image.attached? %>
-              <%= cl_image_tag(current_user.image.key, class: "avatar dropdown-toggle mx-1", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false,
+              <%= cl_image_tag(current_user.image.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false,
                                 transformation: [
                                 {gravity: "face", height: 200, width: 200, crop: "thumb"},
                                 {radius: "max"},
                                 {fetch_format: "auto"}
                                 ])%>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Edit my profile", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "My Bookings", bookings_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
-            </div>
-          </li>
-            <% else %>
-          <li class="nav-item dropdown py-2">
-              <i class="fa-solid fa-user fa-xl avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Edit my profile", edit_user_registration_path, class: "dropdown-item" %>
