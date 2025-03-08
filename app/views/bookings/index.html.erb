@@ -1,19 +1,19 @@
 <div class="container">
-  <h1 class="mt-3">Your Bookings</h1>
+    <h1 class="mt-5 mb-5">Your Bookings</h1>
 
-  <% if @bookings.empty? %>
-    <p>You have no bookings yet.</p>
-  <% else %>
-    <% @bookings.each do |booking| %>
-      <div class="booking">
-        <p><strong>Pet:</strong> <%= booking.pet.name %></p>
-        <p><strong>Start Date:</strong> <%= booking.start_date %></p>
-        <p><strong>End Date:</strong> <%= booking.end_date %></p>
-        <%= link_to 'View Details', booking_path(booking), class: "btn btn-outline-dark" %> |
-        <%= link_to 'Edit', edit_booking_path(booking), class: "btn btn-outline-dark" %> |
-        <%= link_to "Delete", booking_path(booking), class: "btn btn-outline-dark", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> |
-        <%= link_to 'Find a new pet', root_path, class: "btn btn-outline-dark" %>
-      </div>
+    <% if @bookings.empty? %>
+      <p>You have no bookings yet.</p>
+    <% else %>
+      <% @bookings.each do |booking| %>
+        <div class="booking mb-3">
+          <p><strong>Pet:</strong> <%= booking.pet.name %></p>
+          <p><strong>Start Date:</strong> <%= booking.start_date %></p>
+          <p><strong>End Date:</strong> <%= booking.end_date %></p>
+          <%= link_to 'View Details', booking_path(booking), class: "btn btn-outline-dark" %> |
+          <%= link_to 'Edit', edit_booking_path(booking), class: "btn btn-outline-dark" %> |
+          <%= link_to "Delete", booking_path(booking), class: "btn btn-outline-dark", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> |
+          <%= link_to 'Find a new pet', root_path, class: "btn btn-outline-dark" %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
 </div>

@@ -1,6 +1,14 @@
 .header {
+  font-family: "DM Sans", sans-serif;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: center;
+
+  a {
+    margin-top: 5px;
+    text-decoration: none;
+    color: black;
+  }
 }
