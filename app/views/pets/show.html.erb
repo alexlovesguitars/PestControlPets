@@ -11,19 +11,19 @@
       <div class="pet-actions">
         <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill" %>
         <% if @pet.user == current_user %>
-          <%= link_to "Delete", pet_path(@pet), class: "btn btn-danger", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
+          <%= link_to "Delete", pet_path(@pet), class: "btn btn-danger rounded-pill", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
         <% else %>
         <% end %>
       </div>
     </div>
     <div class="pet-actions col-9">
-    <% if @pet.user == current_user %>
-        <%= link_to "Edit your pet", edit_pet_path(@pet), class: "btn btn-outline-primary rounded-pill my-5" %>
+      <% if @pet.user == current_user %>
+        <%= link_to "Edit your pet", edit_pet_path(@pet), class: "btn btn-outline-dark rounded-pill my-5" %>
         <p style="font-size: 25px;"><%= @pet.description %></p>
-      </div>
+    </div>
       <% else %>
       <div class="pet-actions">
-        <%= link_to "Book this pet", new_pet_booking_path(@pet), class: "btn btn-outline-primary rounded-pill mt-5 mb-5" %>
+        <%= link_to "Book this pet", new_pet_booking_path(@pet), class: "btn btn-outline-dark rounded-pill mt-5 mb-5" %>
         <div class="mt-4">
           <p style="font-size: 25px;"><%= @pet.description %></p>
         </div>

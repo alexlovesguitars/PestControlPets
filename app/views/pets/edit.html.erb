@@ -1,27 +1,27 @@
 <div class="container">
-  <h1>Edit <%= @pet.name.capitalize %>'s Hunting Preferences</h1>
+  <h1>Edit <%= @pet.name.capitalize %>'s information</h1>
   <div class="grid d-flex flex-row">
-    <div class="pet-card mt-5 col-3">
+    <div class="pet-show mt-5 col-3">
         <%= cl_image_tag(@pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto") %>
       <div class="pet-info">
-        <p><%= @pet.name.capitalize %><br>
-        <%= @pet.race.capitalize %><br>
-        $<%= @pet.price_per_day %>/day</p>
+        <p class="mt-2"><%= @pet.race.capitalize %></p>
+        <h1 class="mt-0"> <%= @pet.name.capitalize %></h1>
+        <p class="mx-1">$<%= @pet.price_per_day %>/day</p>
       </div>
     </div>
 
 
-      <div class="form-inputs mt-5 mx-5 col-9">
-        <%= simple_form_for @pet do |f| %>
-        <%= f.input :targets, label: "Hunting Targets", hint: "Specify what this pet hunts (e.g., 'mice, birds, small game')" %>
-        <%= f.input :price_per_day, label: "Price per day", input_html: { min: 0, step: 0.01 } %>
-        <%= f.input :description, label: "Description", input_html: { rows: 4 } %>
-        <%= f.input :photo, as: :file %>
-        <div class="form-actions">
-          <%= f.button :submit, "Update your pet", class: "btn btn-outline-primary" %>
-          <%= link_to "Cancel", pet_path(@pet), class: "btn btn-outline-dark" %>
-        </div>
+    <div class="form-inputs mt-5 mx-5 col-9">
+      <%= simple_form_for @pet do |f| %>
+      <%= f.input :targets, label: "Hunting Targets", hint: "Specify what this pet hunts (e.g., 'mice, birds, small game')" %>
+      <%= f.input :price_per_day, label: "Price per day", input_html: { min: 0, step: 0.01 } %>
+      <%= f.input :description, label: "Description", input_html: { rows: 4 } %>
+      <%= f.input :photo, as: :file %>
+      <div class="form-actions">
+        <%= f.button :submit, "Update your pet", class: "btn btn-outline-dark rounded-pill" %>
+        <% end %>
+        <%= link_to "Cancel", pet_path(@pet), class: "btn btn-outline-dark rounded-pill" %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>
