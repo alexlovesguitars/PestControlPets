@@ -1,0 +1,12 @@
+<div class="form-inputs col-9">
+    <%= simple_form_for pet do |f| %>
+    <%= f.input :targets, label: "Hunting Targets", hint: "Specify what this pet hunts (e.g., 'mice, birds, small game')" %>
+    <%= f.input :price_per_day, label: "Price per day", input_html: { min: 0, step: 0.01 } %>
+    <%= f.input :description, label: "Description", input_html: { rows: 4 } %>
+    <%= f.input :photo, as: :file %>
+  <div class="form-actions">
+    <%= f.button :submit, "Update your pet", class: "btn btn-outline-dark rounded-pill" %>
+    <% end %>
+    <%= link_to "Cancel", pet_path(pet), class: "btn btn-outline-dark rounded-pill" %>
+  </div>
+</div>
