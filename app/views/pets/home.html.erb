@@ -1,10 +1,27 @@
-<div class="container home">
-  <div class="header">
-    <h1>Browse for your next pest controller</h1>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h1 id="hero">PestControlPets</h1>
+    <h4 class="mb-4" id="hero-sub">Have a pest? Get a pet to take care of it!</h4>
+    <div class="d-flex justify-content-center mt-3">
+      <%= link_to "List your pet", new_pet_path, class: "btn btn-outline-light rounded-pill mx-1" %>
+      <a href="#awesome-stuff-here" data-controller="scroll-to">
+      <div>
+        <div class="btn btn-outline-light rounded-pill mx-1">
+          Discover pets
+        </div>
+      </div>
+      </a>
+    </div>
   </div>
-  <div class="grid">
-	  <% @pets.each do |pet| %>
-	    <%= render pet %>
-	  <% end %>
-   </div>
+</div>
+
+<div class="container home">
+  <div class="header mb-5 mt-2">
+    <h1 id="awesome-stuff-here">Find your pest controller!</h1>
+  </div>
+  <div class="grid mt-5">
+	<% @pets.each do |pet| %>
+	  <%= render pet %>
+	<% end %>
+  </div>
 </div>

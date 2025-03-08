@@ -1,31 +1,26 @@
 <div class="container">
-  <header class="header">
-    <%= link_to "< Home page", root_path %>
-  </header>
-
-  <div class="grid">
-    <div class="pet-card">
-      <h2>Edit <%= @pet.name %>'s Hunting Preferences</h2>
-        <%= cl_image_tag(@pet.photo.key) %>
+  <h1>Edit <%= @pet.name.capitalize %>'s Hunting Preferences</h1>
+  <div class="grid d-flex flex-row">
+    <div class="pet-card mt-5 col-3">
+        <%= cl_image_tag(@pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto") %>
       <div class="pet-info">
-        <p><strong>Name:</strong> <%= @pet.name %></p>
-        <p><strong>Race:</strong> <%= @pet.race %></p>
-        <p><strong>Price:</strong> $<%= @pet.price_per_day %> per day</p>
-        <p><strong>Description:</strong> <%= @pet.description %></p>
+        <p><%= @pet.name.capitalize %><br>
+        <%= @pet.race.capitalize %><br>
+        $<%= @pet.price_per_day %>/day</p>
       </div>
     </div>
 
-    <%= simple_form_for @pet do |f| %>
-      <div class="form-inputs">
+
+      <div class="form-inputs mt-5 mx-5 col-9">
+        <%= simple_form_for @pet do |f| %>
         <%= f.input :targets, label: "Hunting Targets", hint: "Specify what this pet hunts (e.g., 'mice, birds, small game')" %>
         <%= f.input :price_per_day, label: "Price per day", input_html: { min: 0, step: 0.01 } %>
         <%= f.input :description, label: "Description", input_html: { rows: 4 } %>
         <%= f.input :photo, as: :file %>
-      </div>
-
-      <div class="form-actions">
-        <%= f.button :submit, "Update Hunting Preferences", class: "btn-primary" %>
-        <%= link_to "Cancel", pet_path(@pet), class: "btn btn-secondary" %>
+        <div class="form-actions">
+          <%= f.button :submit, "Update your pet", class: "btn btn-outline-primary" %>
+          <%= link_to "Cancel", pet_path(@pet), class: "btn btn-outline-dark" %>
+        </div>
       </div>
     <% end %>
   </div>
