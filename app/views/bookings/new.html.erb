@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1 class="mt-3">Book <%= @pet.name %></h1>
+  <h1 class="mt-5 mb-5">Book <%= @pet.name %></h1>
 
   <%= simple_form_for [@pet, @booking], data: { unavailable_dates: @unavailable_dates.to_json } do |f| %>
     <% if @booking.errors.any? %>
@@ -15,11 +15,11 @@
     <% end %>
 
     <div class="mt-3">
-      <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker"} } %>
+      <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
     </div>
 
     <div class="mt-3">
-      <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker"} } %>
+      <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
     </div>
 
     <div class="mt-3">
@@ -27,7 +27,4 @@
       <%= link_to 'Back to Home', root_path, class: "btn btn-outline-dark rounded-pill" %>
     </div>
   <% end %>
-
-
-
 </div>

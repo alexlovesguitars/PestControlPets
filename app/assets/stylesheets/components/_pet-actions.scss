@@ -1,0 +1,16 @@
+.pet-actions {
+  border: 1px solid rgba(145, 145, 145, 0.616);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  position: sticky;
+
+  .info {
+    padding: 5px;
+    margin-top: 5px;
+  }
+}
+
+.notice {
+  display: flex;
+  justify-content: center;
+}
