@@ -1,40 +1,36 @@
+<div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cloudinary_url(@pet.photo.key) %>');">
+  <div class="container">
+    <h1 id="hero"><%= @pet.name %></h1>
+  </div>
+</div>
+
 <div class="container">
-  <div class="row">
-    <div class="pet-show mt-5 col-3 px-0">
-      <%= cl_image_tag(@pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto") %>
-      <div class="mb-3">
-        <p><%= @pet.race.capitalize %></p>
-        <h1 class="my-0"><%= @pet.name.capitalize %></h1>
-        <p>$<%= @pet.price_per_day %>/day</p>
-      </div>
-      <p><strong>Prey on:</strong> <%= @pet.targets %></p>
-      <div class="pet-actions">
-        <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill" %>
-        <% if @pet.user == current_user %>
-          <%= link_to "Delete", pet_path(@pet), class: "btn btn-danger rounded-pill", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
-        <% else %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="pet-actions col-9" data-controller="toggle">
+  <div class="row d-flex align-items-start">
+    <div class="mt-5 col-2 first-box">
       <% if @pet.user == current_user %>
-      <button data-action="click->toggle#fire" class="btn btn-outline-dark rounded-pill my-5" >Edit <%= @pet.name %></button>
-      <div data-toggle-target="togglableElement" class="d-none" >
-        <%= render "form", pet: @pet %>
-      </div>
-      <div data-toggle-target="hidableElement" class="mt-3 col-9">
-        <p style="font-size: 25px;"><%= @pet.description %></p>
-      </div>
-    </div>
-
+        <p class="notice"><strong>This is your pet</strong></p>
+        <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill mb-5 d-flex justify-content-center" %>
       <% else %>
-      <div class="pet-actions">
-        <%= link_to "Book this pet", new_pet_booking_path(@pet), class: "btn btn-outline-dark rounded-pill mt-5 mb-5" %>
-        <div class="mt-4">
-          <p style="font-size: 25px;"><%= @pet.description %></p>
+
+        <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill mb-5 d-flex justify-content-center" %>
+      <% end %>
+      <div class="mx-3">
+        <div class="info">
         </div>
       </div>
-    <% end %>
+    </div>
+
+    <div class="col-7 mt-5">
+      <div>
+        <h2 class="mb-2 px-5"><strong>Meet <%= @pet.name.capitalize %></strong></h2>
+        <p class="px-5" style="font-size: 15px;"><%= @pet.race.capitalize %></p>
+        <p class="px-5"><strong>Preys on:</strong> <%= @pet.targets %></p>
+        <p class="mt-5 mx-5" style="font-size: 20px;"><%= @pet.description %></p>
+      </div>
+    </div>
+    <div class="pet-actions col-3 mt-5 d-flex flex-column">
+      <%# RENDER BOOKING FORM HERE %>
+      <%= link_to "Book this pet", new_pet_booking_path(@pet), class: "btn btn-success rounded-pill mt-5 mb-4" %>
+    </div>
   </div>
 </div>
