@@ -1,5 +1,9 @@
 <div class="pet-card">
-  <%= link_to cl_image_tag(pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto"), pet %>
+  <% if pet.photo.present? && pet.photo.key.present? %>
+      <%= link_to cl_image_tag(pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto"), pet %>
+    <% else %>
+      <%= link_to image_tag("placeholder.png", height: 300, width: 300), pet %>
+    <% end %>
   <p class="m-0"><%= pet.race.capitalize %> </p>
   <div class="pet-details mt-1">
     <h2 style="font-size: 25px;"><%= pet.name.capitalize %></h2>

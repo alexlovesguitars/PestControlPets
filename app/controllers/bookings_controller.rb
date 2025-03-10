@@ -6,14 +6,13 @@ class BookingsController < ApplicationController
     @bookings = current_user.bookings
   end
 
-
   def show
   end
 
   def new
     @booking = Booking.new
-    @pet = Pet.find(params[:pet_id])  # To link the pet when creating a booking
-    @unavailable_dates = get_unavailable_dates(@pet)
+    @pet = Pet.find(params[:pet_id])
+    @unavailable_dates = Booking.get_unavailable_dates(@pet)
   end
 
   def create
@@ -21,9 +20,11 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.pet = Pet.find(params[:pet_id])
     if @booking.save
-      redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
+      redirect_to booking_path(@booking), notice: "Booking was successfully created. The total price is $#{@booking.total_price}€."
     else
-      @unavailable_dates = get_unavailable_dates(@pet)
+      @pet = @booking.pet
+      @unavailable_dates = Booking.get_unavailable_dates(@pet)
+      flash[:notice] = 'contains unavailable dates.'
       render :new, status: :unprocessable_entity
     end
   end
@@ -58,19 +59,5 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
-  end
-
-
-  def get_unavailable_dates(pet)
-    bookings = Booking.where(pet: pet)
-    unavailable_dates = []
-
-    bookings.each do |booking|
-        (booking.start_date..booking.end_date).each do |date|
-            unavailable_dates << date.strftime("%Y-%m-%d")
-        end
-    end
-
-    return unavailable_dates.uniq
   end
 end
