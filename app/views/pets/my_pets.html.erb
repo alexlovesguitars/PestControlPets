@@ -7,7 +7,7 @@
       <% @pets.each do |pet| %>
         <div class="pet-card" >
         <% if pet.photo.attached? %>
-          <%= link_to cl_image_tag(pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto"), pet %>
+          <%= cl_image_tag(pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto") %>
         <% else %>
           <span>Hello</span>
         <% end %>
@@ -16,9 +16,9 @@
           <p>$<%= pet.price_per_day %> per day</p>
           <p><%= pet.targets.capitalize %></p>
 
-          <div class="pet-actions">
-            <%= link_to "Edit Pet", edit_pet_path(pet), class: "btn btn-primary" %>
-            <%= link_to "Delete", pet_path(pet), class: "btn btn-danger", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
+          <div>
+            <%= link_to "Edit Pet", edit_pet_path(pet), class: "btn btn-outline-dark rounded-pill mx-3" %>
+            <%= link_to "Delete", pet_path(pet), class: "btn btn-danger rounded-pill fw-bold text-white", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
           </div>
 
         </div>
@@ -26,13 +26,13 @@
     <% else %>
       <div class="no-pets-message">
         <p>You don't have any pest control pets yet.</p>
-        <%= link_to "Add your first pet", new_pet_path, class: "btn btn-primary" %>
+        <%= link_to "Add your first pet", new_pet_path, class: "btn btn-outline-dark rounded-pill" %>
       </div>
     <% end %>
   </div>
   <% if @pets.any? %>
     <div class="add-pet">
-      <%= link_to "Add another pet", new_pet_path, class: "btn btn-primary" %>
+      <%= link_to "Add another pet", new_pet_path, class: "btn btn-outline-dark rounded-pill" %>
     </div>
   <% end %>
 </div>
