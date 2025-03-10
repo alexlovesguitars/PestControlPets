@@ -7,14 +7,14 @@
       <% @pets.each do |pet| %>
         <div class="pet-card" >
         <% if pet.photo.attached? %>
-          <%= cl_image_tag(pet.photo.key, width: "25%") %>
+          <%= link_to cl_image_tag(pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto"), pet %>
         <% else %>
           <span>Hello</span>
         <% end %>
-          <h2><%= link_to pet.name, pet %></h2>
-          <p><%= pet.race %></p>
+          <h2><%= link_to pet.name.capitalize, pet %></h2>
+          <p><%= pet.race.capitalize %></p>
           <p>$<%= pet.price_per_day %> per day</p>
-          <p><%= pet.targets %></p>
+          <p><%= pet.targets.capitalize %></p>
 
           <div class="pet-actions">
             <%= link_to "Edit Pet", edit_pet_path(pet), class: "btn btn-primary" %>

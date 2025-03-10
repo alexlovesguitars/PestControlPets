@@ -14,7 +14,6 @@
 
   <% if @pet.user == current_user %>
     <div class="pet-actions">
-      <%= link_to "Edit Pet Data", edit_pet_path(@pet), class: "btn btn-primary" %>
       <%= link_to "Delete", pet_path(@pet), class: "btn btn-danger", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
     </div>
     <% else %>
