@@ -39,6 +39,10 @@ class PetsController < ApplicationController
     end
   end
 
+  def my_pets
+    @pets = current_user.pets
+  end
+
   private
 
   def set_pet

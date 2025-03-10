@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="header">
+    <h1>My pest control pets</h1>
+  </div>
+  <div class="grid">
+    <% if @pets.any? %>
+      <% @pets.each do |pet| %>
+        <div class="pet-card" >
+        <% if pet.photo.attached? %>
+          <%= link_to cl_image_tag(pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto"), pet %>
+        <% else %>
+          <span>Hello</span>
+        <% end %>
+          <h2><%= link_to pet.name.capitalize, pet %></h2>
+          <p><%= pet.race.capitalize %></p>
+          <p>$<%= pet.price_per_day %> per day</p>
+          <p><%= pet.targets.capitalize %></p>
+
+          <div class="pet-actions">
+            <%= link_to "Edit Pet", edit_pet_path(pet), class: "btn btn-primary" %>
+            <%= link_to "Delete", pet_path(pet), class: "btn btn-danger", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
+          </div>
+
+        </div>
+      <% end %>
+    <% else %>
+      <div class="no-pets-message">
+        <p>You don't have any pest control pets yet.</p>
+        <%= link_to "Add your first pet", new_pet_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  <% if @pets.any? %>
+    <div class="add-pet">
+      <%= link_to "Add another pet", new_pet_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
