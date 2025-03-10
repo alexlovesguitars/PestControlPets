@@ -3,7 +3,11 @@ class PetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :home]
 
   def home
-    @pets = Pet.all
+    if params[:query].present?
+      @pets = Pet.search_by_race(params[:query])
+    else
+      @pets = Pet.all
+    end
   end
 
   def show

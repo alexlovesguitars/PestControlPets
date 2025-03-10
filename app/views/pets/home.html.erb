@@ -18,10 +18,11 @@
 </div>
 
 <div class="container">
-  <div class="header mb-5 mt-2">
-    <h1 id="awesome-stuff-here">
-      Find your pest controller
-    </h1>
+  <div class="px-5 mb-5 mt-5 d-flex flex-column" id="awesome-stuff-here">
+    <%= form_tag root_path, method: :get, class: "d-flex mb-3 mt-3" do %>
+    <%= text_field_tag :query, params[:query], class: "form-control rounded-pill", placeholder: "Find your pest controller..." %>
+    <%= submit_tag "Search", class: "btn btn-success mx-1 fw-bold text-white rounded-pill" %>
+    <% end %>
   </div>
   <div class="grid mt-5">
 	<% @pets.each do |pet| %>
