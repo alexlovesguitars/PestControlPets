@@ -6,13 +6,13 @@ class BookingsController < ApplicationController
     @bookings = current_user.bookings
   end
 
-
   def show
   end
 
   def new
     @booking = Booking.new
-    @pet = Pet.find(params[:pet_id])  # To link the pet when creating a booking
+    @pet = Pet.find(params[:pet_id])
+    @unavailable_dates = Booking.get_unavailable_dates(@pet)
   end
 
   def create
@@ -20,13 +20,22 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.pet = Pet.find(params[:pet_id])
     if @booking.save
-      redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
+      redirect_to booking_path(@booking), notice: "Booking was successfully created. The total price is $#{@booking.total_price}€."
     else
-      render :new
+      @pet = @booking.pet
+      @unavailable_dates = Booking.get_unavailable_dates(@pet)
+      flash[:notice] = 'contains unavailable dates.'
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
+  end
+
+  def unavailable_dates
+    bookings.pluck(:start_on, :end_on).map do |range|
+      { from: range[0], to: range[1] }
+    end
   end
 
   def update

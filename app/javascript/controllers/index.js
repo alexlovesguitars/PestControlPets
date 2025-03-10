@@ -2,3 +2,7 @@
 import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
+
+import ScrollTo from '@stimulus-components/scroll-to'
+
+application.register('scroll-to', ScrollTo)

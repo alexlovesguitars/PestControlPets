@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h2 class="mb-3">Log in</h2>
+  <h1 class="mb-3">Log in</h1>
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Log in", class: "btn btn-primary" %>
+      <%= f.button :submit, "Log in", class: "btn btn-outline-dark rounded-pill" %>
     </div>
   <% end %>
 

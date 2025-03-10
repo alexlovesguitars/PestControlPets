@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root "pets#home"
+  root  "pages#home"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :users, only: [:create, :new, :update]
-  resources :pets, only: [:create, :new, :show, :edit, :update, :destroy]
+  resources :pets, only: [:create, :new, :show, :edit, :update, :destroy, :index]
   resources :bookings, only: [:index, :show, :edit, :update, :destroy]
 
   # Nested bookings for pets

@@ -1,12 +1,12 @@
 <div class="container">
-  <h1>Booking Details</h1>
-
-  <p><strong>Pet:</strong> <%= @booking.pet.name %></p>
-  <p><strong>Start Date:</strong> <%= @booking.start_date %></p>
-  <p><strong>End Date:</strong> <%= @booking.end_date %></p>
-  <p><strong>Description:</strong> <%= @booking.pet.description %></p>
-
-  <%= link_to 'Back to Bookings', bookings_path, class: "btn btn-outline-dark" %> |
-  <%= link_to 'Edit', edit_booking_path(@booking), class: "btn btn-outline-dark" %> |
-  <%= link_to "Delete", booking_path(@booking), class: "btn btn-outline-dark", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <h1 class="mt-5">Booking Details</h1>
+  <div class="mt-5">
+    <p><strong>Pet:</strong> <%= @booking.pet.name %></p>
+    <p><strong>Start Date:</strong> <%= @booking.start_date %></p>
+    <p><strong>End Date:</strong> <%= @booking.end_date %></p>
+    <p><strong>Description:</strong> <%= @booking.pet.description %></p>
+  </div>
+  <%= link_to 'Back to Bookings', bookings_path, class: "btn btn-outline-dark rounded-pill" %> |
+  <%= link_to 'Edit', edit_booking_path(@booking), class: "btn btn-outline-dark rounded-pill" %> |
+  <%= link_to "Delete", booking_path(@booking), class: "btn btn-outline-dark rounded-pill", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 </div>

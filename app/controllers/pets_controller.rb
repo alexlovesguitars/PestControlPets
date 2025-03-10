@@ -1,10 +1,6 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:show, :home]
-
-  def home
-    @pets = Pet.all
-  end
+  skip_before_action :authenticate_user!, only: [:show]
 
   def show
   end

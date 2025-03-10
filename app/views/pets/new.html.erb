@@ -1,13 +1,15 @@
 <div class="container">
-  <h2>new pet page</h2>
+  <h1 class="mt-5 mb-5">Add a new pet</h2>
 
   <%= simple_form_for(@pet) do |f| %>
     <%= f.input :name %>
     <%= f.input :race %>
     <%= f.input :price_per_day%>
-    <%= f.input :description%>
+    <%= f.input :description %>
     <%= f.input :targets%>
     <%= f.input :photo, as: :file %>
-    <%= f.submit %>
+    <div class="form-actions">
+    <%= f.button :submit, "Add your pet!", class: "btn btn-outline-dark rounded-pill mt-3" %>
+    </div>
   <% end %>
 </div>

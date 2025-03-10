@@ -1,26 +1,31 @@
+<div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cloudinary_url(@pet.photo.key) %>');">
+  <div class="container">
+    <h1 id="hero"><%= @pet.name %></h1>
+  </div>
+</div>
+
 <div class="container">
-  <header class="header">
-    <%= link_to "< Home page", root_path %>
-  </header>
-  <div class="grid">
-    <div class="pet-card">
-      <%= cl_image_tag(@pet.photo.key, width: "25%") %>
-      <h2><%= @pet.name %></h2>
-      <p><%= @pet.race %></p>
-      <p>$<%= @pet.price_per_day %> per day</p>
-      <p><%= @pet.targets %></p>
-      <p><%= @pet.description %></p>
+  <div class="row d-flex align-items-start">
+    <div class="mt-5 col-2 first-box">
+      <% if @pet.user == current_user %>
+        <p class="notice"><strong>This is your pet</strong></p>
+        <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill mb-5 d-flex justify-content-center" %>
+      <% else %>
+        <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill mb-5 d-flex justify-content-center" %>
+      <% end %>
     </div>
 
-  <% if @pet.user == current_user %>
-    <div class="pet-actions">
-      <%= link_to "Delete", pet_path(@pet), class: "btn btn-danger", data: { "turbo-confirm": 'Are you sure?', turbo_method: :delete } %>
+    <div class="col-7 mt-5">
+      <div>
+        <h2 class="mb-1 px-5"><strong>Meet <%= @pet.name.capitalize %></strong></h2>
+        <p class="px-5" style="font-size: 15px;"><%= @pet.race.capitalize %></p>
+        <p class="px-5"><strong>Preys on:</strong> <%= @pet.targets %></p>
+        <p class="mt-5 mx-5 lh-base" style="font-size: 20px;"><%= @pet.description %></p>
+      </div>
     </div>
-    <% else %>
-    <div class="pet-actions">
-      <%= link_to "Book this pet", new_pet_booking_path(@pet), class: "btn btn-primary" %>
+    <div class="pet-actions col-3 mt-5 d-flex flex-column">
+      <%# RENDER BOOKING FORM HERE %>
+      <%= link_to "Book this pet", new_pet_booking_path(@pet), class: "btn btn-success rounded-pill mt-5 mb-4 fw-bold text-white" %>
     </div>
-  <% end %>
-
   </div>
 </div>

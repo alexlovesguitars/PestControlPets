@@ -1,8 +1,14 @@
 <div class="container">
 
-  <h1 class="mt-3">Book <%= @pet.name %></h1>
+  <h1 class="mt-5 mb-5">Book <%= @pet.name %></h1>
 
-  <%= simple_form_for [@pet, @booking] do |f| %>
+  <% if flash[:notice] %>
+    <div class="alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <%= simple_form_for [@pet, @booking], data: { unavailable_dates: @unavailable_dates.to_json } do |f| %>
     <% if @booking.errors.any? %>
       <div class="errors">
         <h2>Errors:</h2>
@@ -15,18 +21,16 @@
     <% end %>
 
     <div class="mt-3">
-      <%= f.date_field :start_date %>
+      <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
     </div>
 
     <div class="mt-3">
-      <%= f.date_field :end_date %>
+      <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
     </div>
 
     <div class="mt-3">
-      <%= f.submit "Create Booking", class: "btn btn-primary" %>
+      <%= f.submit "Create Booking", class: "btn btn-outline-dark rounded-pill" %>
+      <%= link_to 'Back to Home', root_path, class: "btn btn-outline-dark rounded-pill" %>
     </div>
   <% end %>
-
-  <%= link_to 'Back to Home', root_path, class: "btn btn-outline-dark" %>
-
 </div>
