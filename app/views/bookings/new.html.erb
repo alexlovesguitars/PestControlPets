@@ -2,6 +2,12 @@
 
   <h1 class="mt-5 mb-5">Book <%= @pet.name %></h1>
 
+  <% if flash[:notice] %>
+    <div class="alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
   <%= simple_form_for [@pet, @booking], data: { unavailable_dates: @unavailable_dates.to_json } do |f| %>
     <% if @booking.errors.any? %>
       <div class="errors">
