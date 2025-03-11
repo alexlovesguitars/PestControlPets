@@ -16,9 +16,9 @@
         <% else %>
           <span>Hello</span>
         <% end %>
-          <h2><%= link_to pet.name.capitalize, pet %></h2>
           <p><%= pet.race.capitalize %></p>
-          <p>$<%= pet.price_per_day %> per day</p>
+          <h2><%= link_to pet.name.capitalize, pet %></h2>
+          <p><%= pet.price_per_day %>€/day</p>
           <p><%= pet.targets.capitalize %></p>
 
           <div>

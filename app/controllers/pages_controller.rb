@@ -7,5 +7,9 @@ class PagesController < ApplicationController
     else
       @pets = Pet.all
     end
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 end

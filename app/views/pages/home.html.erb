@@ -5,9 +5,8 @@
     <h4 class="mb-4" id="hero-sub">Have a pest? Get a pet to take care of it!</h4>
     <div class="d-flex justify-content-center mt-3">
       <%= link_to "List your pet", new_pet_path, class: "btn btn-outline-light rounded-pill mx-1" %>
-      <a href="#awesome-stuff-here" data-controller="scroll-to"
-          data-scroll-to-offset-value="96"
-          data-scroll-to-behavior-value="auto">
+      <a href="#search-form" data-controller="scroll-to"
+          data-scroll-to-offset-value="96">
       <div>
         <div class="btn btn-outline-light rounded-pill mx-1">
           Discover pets
@@ -19,15 +18,18 @@
 </div>
 
 <div class="container">
-  <div class="px-5 mb-5 mt-5 d-flex flex-column" id="awesome-stuff-here">
-    <%= form_tag root_path, method: :get, class: "d-flex mb-3 mt-3" do %>
-    <%= text_field_tag :query, params[:query], class: "form-control rounded-pill UserInput", placeholder: "Find your pest controller..." %>
-    <%= submit_tag "Search", class: "btn btn-success mx-1 fw-bold text-white rounded-pill", id: "search-button" %>
-    <% end %>
-  </div>
-  <div class="grid mt-5 mb-5" id="results">
-	<% @pets.each do |pet| %>
-	  <%= render pet %>
-	<% end %>
-  </div>
+    <div class="px-5 mb-5 mt-5 d-flex flex-column">
+      <%= form_tag root_path, method: :get, data: { turbo_frame: "results" }, id: "search-form", class: "d-flex mb-3 mt-3" do %>
+      <%= text_field_tag :query, params[:query], class: "form-control rounded-pill UserInput", placeholder: "Find your pest controller..." %>
+      <%= submit_tag "Search", class: "btn btn-success mx-1 fw-bold text-white rounded-pill", id: "search-button" %>
+      <% end %>
+    </div>
+
+    <turbo-frame id="results">
+      <div class="grid mt-5 mb-5">
+      <% @pets.each do |pet| %>
+        <%= render pet %>
+      <% end %>
+      </div>
+    </turbo-frame>
 </div>
