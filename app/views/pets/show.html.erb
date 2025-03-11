@@ -11,26 +11,52 @@
         <p class="notice"><strong>This is your pet</strong></p>
         <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill mb-5 d-flex justify-content-center" %>
       <% else %>
-
         <%= link_to "Go Back", root_path, class: "btn btn-outline-dark rounded-pill mb-5 d-flex justify-content-center" %>
       <% end %>
-      <div class="mx-3">
-        <div class="info">
-        </div>
-      </div>
     </div>
 
     <div class="col-7 mt-5">
       <div>
-        <h2 class="mb-2 px-5"><strong>Meet <%= @pet.name.capitalize %></strong></h2>
+        <h2 class="mb-1 px-5"><strong>Meet <%= @pet.name.capitalize %></strong></h2>
         <p class="px-5" style="font-size: 15px;"><%= @pet.race.capitalize %></p>
         <p class="px-5"><strong>Preys on:</strong> <%= @pet.targets %></p>
-        <p class="mt-5 mx-5" style="font-size: 20px;"><%= @pet.description %></p>
+        <p class="mt-5 mx-5 lh-base" style="font-size: 20px;"><%= @pet.description %></p>
       </div>
     </div>
     <div class="pet-actions col-3 mt-5 d-flex flex-column">
-      <%# RENDER BOOKING FORM HERE %>
-      <%= link_to "Book this pet", new_pet_booking_path(@pet), class: "btn btn-success rounded-pill mt-5 mb-4" %>
+      <h1 class="px-2 mt-5 mb-1">Book <%= @pet.name %></h1>
+
+        <% if flash[:notice] %>
+          <div class="alert alert-info">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+
+        <%= simple_form_for [@pet, @booking], data: { unavailable_dates: @unavailable_dates.to_json } do |f| %>
+          <% if @booking.errors.any? %>
+            <div class="errors">
+              <h2>Errors:</h2>
+              <ul>
+                <% @booking.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mt-3">
+            <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
+          </div>
+
+          <div class="mt-3">
+            <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
+          </div>
+
+          <div id="button-container">
+            <%= f.submit "Book this pet", class: "full-width btn btn-success rounded-pill mb-2 fw-bold text-white" %>
+          </div>
+        <% end %>
+      <%= link_to 'Back to Home', root_path, class: "btn btn-outline-dark rounded-pill px-3 mb-5" %>
     </div>
   </div>
 </div>

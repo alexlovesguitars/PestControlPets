@@ -1,4 +1,8 @@
 <div class="container">
+  <header class="header">
+    <%= link_to "< Home page", root_path %>
+  </header>
+
   <h1>Edit <%= @pet.name.capitalize %>'s information</h1>
   <div class="grid d-flex flex-row">
     <div class="pet-show mt-5 col-3">
@@ -20,7 +24,7 @@
       <div class="form-actions">
         <%= f.button :submit, "Update your pet", class: "btn btn-outline-dark rounded-pill" %>
         <% end %>
-        <%= link_to "Cancel", pet_path(@pet), class: "btn btn-outline-dark rounded-pill" %>
+        <%= link_to "Cancel", my_pets_path, class: "btn btn-outline-dark rounded-pill" %>
       </div>
     </div>
   </div>

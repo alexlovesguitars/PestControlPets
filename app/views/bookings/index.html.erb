@@ -12,7 +12,7 @@
           <p><strong>Total price:</strong> <%= booking.total_price %></p>
           <%= link_to 'View Details', booking_path(booking), class: "btn btn-outline-dark rounded-pill" %> |
           <%= link_to 'Edit', edit_booking_path(booking), class: "btn btn-outline-dark rounded-pill" %> |
-          <%= link_to "Delete", booking_path(booking), class: "btn btn-outline-dark rounded-pill", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> |
+          <%= link_to "Delete", booking_path(booking), class: "btn btn-outline-danger rounded-pill", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> |
           <%= link_to 'Find a new pet', root_path, class: "btn btn-outline-dark rounded-pill" %>
         </div>
       <% end %>

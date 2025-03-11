@@ -1,12 +1,9 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:show, :home]
-
-  def home
-    @pets = Pet.all
-  end
+  skip_before_action :authenticate_user!, only: [:show]
 
   def show
+    @booking = Booking.new
   end
 
   def new
@@ -41,6 +38,10 @@ class PetsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def my_pets
+    @pets = current_user.pets
   end
 
   private

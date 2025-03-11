@@ -18,7 +18,7 @@
             <%= link_to "List your pet", new_pet_path, class: "btn btn-outline-dark rounded-pill mx-1" %>
           </li>
           <li class="nav-item active mx-1">
-            <%= link_to "My pets", "#", class: "btn btn-outline-dark rounded-pill" %>
+            <%= link_to "My pets", my_pets_path, class: "btn btn-outline-dark rounded-pill" %>
           </li>
           <li class="nav-item dropdown mx-1">
             <% if current_user.image.attached? %>
