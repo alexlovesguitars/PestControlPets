@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:edit, :show, :update, :destroy]
+  before_action :set_booking, only: [:edit, :show, :update, :destroy, :unavailable_dates]
   before_action :authenticate_user!
 
   def index
@@ -31,13 +31,12 @@ class BookingsController < ApplicationController
 
   def edit
     @pet = @booking.pet
-    @unavailable_dates = Booking.get_unavailable_dates(@pet, @booking.id)
+    @unavailable_dates = unavailable_dates
   end
 
   def unavailable_dates
-    bookings.pluck(:start_on, :end_on).map do |range|
-      { from: range[0], to: range[1] }
-    end
+    @pet = @booking.pet
+    @pet.bookings.pluck(:start_date, :end_date)
   end
 
   def update
@@ -45,7 +44,7 @@ class BookingsController < ApplicationController
       redirect_to booking_path(@booking), notice: 'Booking was successfully updated.'
     else
       @pet = @booking.pet
-      @unavailable_dates = Booking.get_unavailable_dates(@pet, @booking.id)
+      @unavailable_dates = unavailable_dates
       render :edit, status: :unprocessable_entity
     end
   end

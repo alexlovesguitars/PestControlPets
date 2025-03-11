@@ -1,9 +1,10 @@
 class PetsController < ApplicationController
-  before_action :set_pet, only: [:show, :edit, :update, :destroy]
+  before_action :set_pet, only: [:show, :edit, :update, :destroy, :unavailable_dates]
   skip_before_action :authenticate_user!, only: [:show]
 
   def show
     @booking = Booking.new
+    @unavailable_dates = unavailable_dates
   end
 
   def new
@@ -42,6 +43,10 @@ class PetsController < ApplicationController
 
   def my_pets
     @pets = current_user.pets
+  end
+
+  def unavailable_dates
+    @pet.bookings.pluck(:start_date, :end_date)
   end
 
   private

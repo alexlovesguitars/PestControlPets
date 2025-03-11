@@ -32,7 +32,7 @@
           </div>
         <% end %>
 
-        <%= simple_form_for [@pet, @booking], data: { unavailable_dates: @unavailable_dates.to_json } do |f| %>
+        <%= simple_form_for [@pet, @booking] do |f| %>
           <% if @booking.errors.any? %>
             <div class="errors">
               <h2>Errors:</h2>
@@ -45,11 +45,11 @@
           <% end %>
 
           <div class="mt-3">
-            <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
+            <%= f.input :start_date, as: :string, input_html: {data: { controller: "datepicker", datepicker_dates_value: @unavailable_dates.to_json} }, placeholder: "Select Date..." %>
           </div>
 
           <div class="mt-3">
-            <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker"} }, placeholder: "Select Date..." %>
+            <%= f.input :end_date, as: :string, input_html: {data: { controller: "datepicker", datepicker_dates_value: @unavailable_dates.to_json} }, placeholder: "Select Date..." %>
           </div>
 
           <div id="button-container">
