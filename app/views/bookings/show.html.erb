@@ -6,7 +6,5 @@
     <p><strong>End Date:</strong> <%= @booking.end_date %></p>
     <p><strong>Description:</strong> <%= @booking.pet.description %></p>
   </div>
-  <%= link_to 'Back to Bookings', bookings_path, class: "btn btn-outline-dark rounded-pill" %> |
-  <%= link_to 'Edit', edit_booking_path(@booking), class: "btn btn-outline-dark rounded-pill" %> |
-  <%= link_to "Delete", booking_path(@booking), class: "btn btn-outline-dark rounded-pill", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <%= link_to 'Back to Bookings', bookings_path, class: "btn btn-outline-dark rounded-pill" %>
 </div>
