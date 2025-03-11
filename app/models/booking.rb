@@ -6,7 +6,7 @@ class Booking < ApplicationRecord
   validates :end_date, presence: true
   validate :start_date_before_end_date
 
-  validate :other_booking_overlap
+  validate :date_range_available
 
   def self.get_unavailable_dates(pet, current_booking_id = nil)
     bookings = Booking.where(pet: pet)
@@ -25,6 +25,7 @@ class Booking < ApplicationRecord
 
     return unavailable_dates.uniq
   end
+
 
   def total_price
     days_booked = (end_date - start_date).to_i + 1
@@ -58,6 +59,8 @@ class Booking < ApplicationRecord
       end
     end
   end
+
+
 
 
 end
