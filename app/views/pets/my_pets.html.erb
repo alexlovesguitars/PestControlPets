@@ -2,6 +2,11 @@
   <div class="header">
     <h1>My pest control pets</h1>
   </div>
+  <% if @pets.any? %>
+    <div class="add-pet">
+      <%= link_to "Add another pet", new_pet_path, class: "btn btn-outline-dark rounded-pill mb-5" %>
+    </div>
+  <% end %>
   <div class="grid">
     <% if @pets.any? %>
       <% @pets.each do |pet| %>
@@ -30,9 +35,5 @@
       </div>
     <% end %>
   </div>
-  <% if @pets.any? %>
-    <div class="add-pet">
-      <%= link_to "Add another pet", new_pet_path, class: "btn btn-outline-dark rounded-pill" %>
-    </div>
-  <% end %>
+
 </div>
