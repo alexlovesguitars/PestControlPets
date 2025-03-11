@@ -6,7 +6,7 @@ class Booking < ApplicationRecord
   validates :end_date, presence: true
   validate :start_date_before_end_date
 
-  validate :date_range_available
+  validate :other_booking_overlap
 
   def self.get_unavailable_dates(pet)
     bookings = Booking.where(pet: pet).where.not(id: nil)
@@ -28,6 +28,12 @@ class Booking < ApplicationRecord
     days_booked * pet.price_per_day
   end
 
+
+  def period
+    (start_date..end_date)
+  end
+
+
   private
 
   def start_date_before_end_date
@@ -36,16 +42,31 @@ class Booking < ApplicationRecord
     end
   end
 
-  def date_range_available
-    return unless start_date && end_date && pet
+  # def date_range_available
+  #   return unless start_date && end_date && pet
 
-    unavailable_dates = Booking.get_unavailable_dates(pet)
+  #   unavailable_dates = Booking.get_unavailable_dates(pet)
 
-    (start_date..end_date).each do |date|
-      if unavailable_dates.include?(date.strftime("%Y-%m-%d"))
-        errors.add(:base, "The selected date range contains unavailable dates.")
-        break
+  #   (start_date..end_date).each do |date|
+  #     if unavailable_dates.include?(date.strftime("%Y-%m-%d"))
+  #       errors.add(:start_date, "The selected date range contains unavailable dates.")
+  #       break
+  #     end
+  #   end
+  # end
+
+
+
+  def other_booking_overlap
+    if errors.blank?
+      other_bookings = pet.bookings
+      overlapping_bookings = other_bookings.select do |other_booking|
+        period.overlaps?(other_booking.period)
       end
+      is_overlapping = !overlapping_bookings.empty?
+      errors.add(:base, "Picked date is not available") if is_overlapping
     end
   end
+
+
 end

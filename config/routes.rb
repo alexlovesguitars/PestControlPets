@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :users, only: [:create, :new, :update]
-  resources :pets, only: [:create, :new, :show, :edit, :update, :destroy, :index]
+  resources :pets, only: [:create, :new, :show, :edit, :update, :destroy]
   resources :bookings, only: [:index, :show, :edit, :update, :destroy]
 
   # Nested bookings for pets

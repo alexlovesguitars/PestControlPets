@@ -1,3 +1,4 @@
+
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
   <div class="container">
     <h1 id="hero">PestControlPets</h1>
@@ -20,11 +21,11 @@
 <div class="container">
   <div class="px-5 mb-5 mt-5 d-flex flex-column" id="awesome-stuff-here">
     <%= form_tag root_path, method: :get, class: "d-flex mb-3 mt-3" do %>
-    <%= text_field_tag :query, params[:query], class: "form-control rounded-pill", placeholder: "Find your pest controller..." %>
-    <%= submit_tag "Search", class: "btn btn-success mx-1 fw-bold text-white rounded-pill" %>
+    <%= text_field_tag :query, params[:query], class: "form-control rounded-pill UserInput", placeholder: "Find your pest controller..." %>
+    <%= submit_tag "Search", class: "btn btn-success mx-1 fw-bold text-white rounded-pill", id: "search-button" %>
     <% end %>
   </div>
-  <div class="grid mt-5">
+  <div class="grid mt-5 mb-5" id="results">
 	<% @pets.each do |pet| %>
 	  <%= render pet %>
 	<% end %>

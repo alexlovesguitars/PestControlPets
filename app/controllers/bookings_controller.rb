@@ -20,16 +20,17 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.pet = Pet.find(params[:pet_id])
     if @booking.save
-      redirect_to booking_path(@booking), notice: "Booking was successfully created. The total price is $#{@booking.total_price}€."
+      redirect_to booking_path(@booking), notice: "Booking was successfully created. The total price is #{@booking.total_price}€."
     else
       @pet = @booking.pet
       @unavailable_dates = Booking.get_unavailable_dates(@pet)
-      flash[:notice] = 'contains unavailable dates.'
+      # flash[:notice] = 'contains unavailable dates.'
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
+    @unavailable_dates = Booking.get_unavailable_dates(@pet)
   end
 
   def unavailable_dates
@@ -60,4 +61,18 @@ class BookingsController < ApplicationController
   def set_booking
     @booking = Booking.find(params[:id])
   end
+
+
+  # def get_unavailable_dates(pet)
+  #   bookings = Booking.new.where(pet: pet)
+  #   unavailable_dates = []
+
+  #   bookings.each do |booking|
+  #     (booking.start_date..booking.end_date).each do
+  #       unavailable_dates << date.strftime("%Y-%m-%d")
+  #     end
+  #   end
+
+  #   return unavailable_dates.uniq
+  # end
 end
