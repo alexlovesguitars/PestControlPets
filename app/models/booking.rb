@@ -8,14 +8,17 @@ class Booking < ApplicationRecord
 
   validate :other_booking_overlap
 
-  def self.get_unavailable_dates(pet)
-    bookings = Booking.where(pet: pet).where.not(id: nil)
+  def self.get_unavailable_dates(pet, current_booking_id = nil)
+    bookings = Booking.where(pet: pet)
     unavailable_dates = []
 
     bookings.each do |booking|
       if booking.start_date && booking.end_date
         (booking.start_date..booking.end_date).each do |date|
-          unavailable_dates << date.strftime("%Y-%m-%d")
+          date_str = date.strftime("%Y-%m-%d")
+          if booking.id != current_booking_id # Exclude dates if booking is the current one
+            unavailable_dates << date_str
+          end
         end
       end
     end
@@ -42,29 +45,17 @@ class Booking < ApplicationRecord
     end
   end
 
-  # def date_range_available
-  #   return unless start_date && end_date && pet
+  def date_range_available
+    return unless start_date && end_date && pet
+    unavailable_dates = Booking.get_unavailable_dates(pet, id)
 
-  #   unavailable_dates = Booking.get_unavailable_dates(pet)
+    (start_date..end_date).each do |date|
+      if unavailable_dates.include?(date.strftime("%Y-%m-%d")) &&
+        !(id && date.strftime("%Y-%m-%d") >= created_at.to_date.strftime("%Y-%m-%d") && date.strftime("%Y-%m-%d") <= updated_at.to_date.strftime("%Y-%m-%d"))
 
-  #   (start_date..end_date).each do |date|
-  #     if unavailable_dates.include?(date.strftime("%Y-%m-%d"))
-  #       errors.add(:start_date, "The selected date range contains unavailable dates.")
-  #       break
-  #     end
-  #   end
-  # end
-
-
-
-  def other_booking_overlap
-    if errors.blank?
-      other_bookings = pet.bookings
-      overlapping_bookings = other_bookings.select do |other_booking|
-        period.overlaps?(other_booking.period)
+        errors.add(:base, "The selected date range contains unavailable dates.")
+        break
       end
-      is_overlapping = !overlapping_bookings.empty?
-      errors.add(:base, "Picked date is not available") if is_overlapping
     end
   end
 

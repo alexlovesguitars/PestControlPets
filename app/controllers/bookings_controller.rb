@@ -30,7 +30,8 @@ class BookingsController < ApplicationController
   end
 
   def edit
-    @unavailable_dates = Booking.get_unavailable_dates(@pet)
+    @pet = @booking.pet
+    @unavailable_dates = Booking.get_unavailable_dates(@pet, @booking.id)
   end
 
   def unavailable_dates
@@ -43,6 +44,8 @@ class BookingsController < ApplicationController
     if @booking.update(booking_params)
       redirect_to booking_path(@booking), notice: 'Booking was successfully updated.'
     else
+      @pet = @booking.pet
+      @unavailable_dates = Booking.get_unavailable_dates(@pet, @booking.id)
       render :edit, status: :unprocessable_entity
     end
   end
