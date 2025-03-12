@@ -46,7 +46,13 @@ class PetsController < ApplicationController
   end
 
   def unavailable_dates
-    @pet.bookings.pluck(:start_date, :end_date)
+    dates = []
+    @pet.bookings.each do |booking|
+      if booking.start_date && booking.end_date
+        dates << { from: booking.start_date.strftime("%Y-%m-%d"), to: booking.end_date.strftime("%Y-%m-%d") }
+      end
+    end
+    dates
   end
 
   private
