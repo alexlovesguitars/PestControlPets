@@ -1,19 +1,30 @@
-<div class="container">
-    <h1 class="mt-5 mb-5">Your Bookings</h1>
+<div class="show-banner mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h1 id="hero">Your Bookings</h1>
+  </div>
+</div>
+
+
+<div class="container mb-5">
 
     <% if @bookings.empty? %>
-      <p>You have no bookings yet.</p>
+      <p class="mt-5">You have no bookings yet.</p>
     <% else %>
       <% @bookings.each do |booking| %>
-        <div class="booking mb-5">
-          <p><strong>Pet:</strong> <%= booking.pet.name %></p>
-          <p><strong>Start Date:</strong> <%= booking.start_date %></p>
-          <p><strong>End Date:</strong> <%= booking.end_date %></p>
-          <p><strong>Total price:</strong> <%= booking.total_price %></p>
-          <%= link_to 'View Details', booking_path(booking), class: "btn btn-outline-dark rounded-pill" %> |
-          <%= link_to 'Edit', edit_booking_path(booking), class: "btn btn-outline-dark rounded-pill" %> |
-          <%= link_to "Delete", booking_path(booking), class: "btn btn-outline-danger rounded-pill", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> |
-          <%= link_to 'Find a new pet', root_path, class: "btn btn-outline-dark rounded-pill" %>
+        <div class="booking mb-5 d-flex">
+          <div class="booking-pet-show">
+            <%= cl_image_tag(booking.pet.photo.key, gravity: "auto", height: 300, width: 300, crop: "auto", class: "mb-3 mx-5") %>
+          </div>
+          <div class="mt-5 booking-pet-show">
+            <p><strong>Pet:</strong> <%= booking.pet.name %></p>
+            <p><strong>Start Date:</strong> <%= booking.start_date %></p>
+            <p><strong>End Date:</strong> <%= booking.end_date %></p>
+            <p><strong>Total price:</strong> <%= booking.total_price %></p>
+            <%= link_to 'View Details', booking_path(booking), class: "btn btn-outline-dark rounded-pill" %> |
+            <%= link_to 'Edit', edit_booking_path(booking), class: "btn btn-outline-dark rounded-pill" %> |
+            <%= link_to "Delete", booking_path(booking), class: "btn btn-outline-danger rounded-pill", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> |
+            <%= link_to 'Find a new pet', root_path, class: "btn btn-outline-dark rounded-pill" %>
+          </div>
         </div>
       <% end %>
     <% end %>
