@@ -1,7 +1,11 @@
-<div class="container">
-  <div class="header">
-    <h1>My pest control pets</h1>
+<div class="show-banner mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h1 id="hero">My pest control pets</h1>
   </div>
+</div>
+
+
+<div class="container">
   <% if @pets.any? %>
     <div class="add-pet">
       <%= link_to "Add another pet", new_pet_path, class: "btn btn-outline-dark rounded-pill mb-5" %>

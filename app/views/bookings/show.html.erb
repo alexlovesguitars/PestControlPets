@@ -1,5 +1,10 @@
+<div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cloudinary_url(@booking.pet.photo.key) %>');">
+  <div class="container">
+    <h1 id="hero">Booking details for <%= @booking.pet.name %></h1>
+  </div>
+</div>
+
 <div class="container">
-  <h1 class="mt-5">Booking Details</h1>
   <div class="mt-5">
     <p><strong>Pet:</strong> <%= @booking.pet.name %></p>
     <p><strong>Start Date:</strong> <%= @booking.start_date %></p>
