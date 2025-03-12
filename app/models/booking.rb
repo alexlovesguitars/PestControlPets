@@ -14,24 +14,22 @@ class Booking < ApplicationRecord
 
     bookings.each do |booking|
       if booking.start_date && booking.end_date
-        (booking.start_date..booking.end_date).each do |date|
-          date_str = date.strftime("%Y-%m-%d")
-          if booking.id != current_booking_id # Exclude dates if booking is the current one
-            unavailable_dates << date_str
-          end
+        if booking.id != current_booking_id
+          unavailable_dates << {
+            from: booking.start_date.strftime("%Y-%m-%d"),
+            to: booking.end_date.strftime("%Y-%m-%d")
+          }
         end
       end
     end
 
-    return unavailable_dates.uniq
+    return unavailable_dates
   end
-
 
   def total_price
     days_booked = (end_date - start_date).to_i + 1
     days_booked * pet.price_per_day
   end
-
 
   def period
     (start_date..end_date)

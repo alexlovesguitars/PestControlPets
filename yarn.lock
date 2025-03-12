@@ -11,3 +11,8 @@
   version "5.0.1"
   resolved "https://registry.npmjs.org/@stimulus-components/scroll-to/-/scroll-to-5.0.1.tgz"
   integrity sha512-teJlu+wQAw3Bl5vI2TJLzW0OxH8W05StYPlWZFUDjudJzhUZwuF27dfu+KH/PwEELWyRyiwC+msXlXXWSTeHmQ==
+
+flatpickr@^4.6.13:
+  version "4.6.13"
+  resolved "https://registry.npmjs.org/flatpickr/-/flatpickr-4.6.13.tgz"
+  integrity sha512-97PMG/aywoYpB4IvbvUJi0RQi8vearvU0oov1WW3k0WZPBMrTQVqekSX5CjSG/M4Q3i6A/0FKXC7RyAoAUUSPw==
