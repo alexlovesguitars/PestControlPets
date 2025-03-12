@@ -1,3 +1,4 @@
+<%= turbo_page_requires_reload %>
 <div class="show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cloudinary_url(@pet.photo.key) %>');">
   <div class="container">
     <h1 id="hero"><%= @pet.name %></h1>
