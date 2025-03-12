@@ -10,9 +10,10 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @booking = Booking.new
+    @booking = Booking.new(pet_id: params[:pet_id])
     @pet = Pet.find(params[:pet_id])
     @unavailable_dates = Booking.get_unavailable_dates(@pet)
+    puts "@unavailable_dates: #{@unavailable_dates.inspect}"
   end
 
   def create
@@ -24,19 +25,26 @@ class BookingsController < ApplicationController
     else
       @pet = @booking.pet
       @unavailable_dates = Booking.get_unavailable_dates(@pet)
-      # flash[:notice] = 'contains unavailable dates.'
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit
     @pet = @booking.pet
-    @unavailable_dates = unavailable_dates
+    @unavailable_dates = Booking.get_unavailable_dates(@pet, @booking.id)
   end
 
   def unavailable_dates
     @pet = @booking.pet
-    @pet.bookings.pluck(:start_date, :end_date)
+    unavailable_dates = []
+
+    @pet.bookings.each do |booking|
+      if booking != @booking && booking.start_date && booking.end_date
+        unavailable_dates << { from: booking.start_date.strftime("%Y-%m-%d"), to: booking.end_date.strftime("%Y-%m-%d") }
+      end
+    end
+
+    render json: unavailable_dates
   end
 
   def update
@@ -44,7 +52,7 @@ class BookingsController < ApplicationController
       redirect_to booking_path(@booking), notice: 'Booking was successfully updated.'
     else
       @pet = @booking.pet
-      @unavailable_dates = unavailable_dates
+      @unavailable_dates = Booking.get_unavailable_dates(@pet, @booking.id)
       render :edit, status: :unprocessable_entity
     end
   end
