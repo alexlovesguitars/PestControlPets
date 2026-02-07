@@ -28,6 +28,8 @@
                                 {radius: "max"},
                                 {fetch_format: "auto"}
                                 ])%>
+            <% else %>
+              <%= image_tag "user-astronaut-solid.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Edit my profile", edit_user_registration_path, class: "dropdown-item" %>
