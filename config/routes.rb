@@ -22,7 +22,4 @@ Rails.application.routes.draw do
 
   get 'my_pets', to: 'pets#my_pets', as: :my_pets
 
-  if Rails.env.production?
-  get '/run_seeds', to: 'seeds#run'
-  end
 end
