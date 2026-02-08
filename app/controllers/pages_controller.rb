@@ -10,6 +10,7 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.turbo_stream
       format.html
+      format.any { head :ok }
     end
   end
 end
