@@ -7,9 +7,5 @@ class PagesController < ApplicationController
     else
       @pets = Pet.all
     end
-    respond_to do |format|
-      format.turbo_stream { head :ok }
-      format.html
-    end
   end
 end
