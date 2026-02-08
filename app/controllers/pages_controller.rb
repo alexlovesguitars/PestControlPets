@@ -8,9 +8,8 @@ class PagesController < ApplicationController
       @pets = Pet.all
     end
     respond_to do |format|
-      format.turbo_stream
+      format.turbo_stream { head :ok }
       format.html
-      format.any { head :ok }
     end
   end
 end
